@@ -1,0 +1,180 @@
+{
+  "$schema": "https://www.krakend.io/schema/v3.json",
+  "version": 3,
+  "name": "{{ env "SERVICE_NAME" }} ({{ .service.environment }})",
+  "port": {{ .service.port }},
+  "timeout": "{{ .service.timeout }}",
+  "cache_ttl":  "{{ .service.cache_ttl }}",
+  "output_encoding": "{{ .service.output_encoding }}",
+  "plugin": {
+    "pattern": ".so",
+    "folder": "/usr/lib/krakend/plugins"
+  },
+  "endpoints": [
+    {
+      "endpoint": "/v1/tenant/{tenantID}/load_balancers",
+      "method": "GET",
+      "input_headers": [
+        "Infratographer-Auth"
+      ],
+      "backend": [
+        {
+          "host": ["https://api.load-balancer-api"],
+          "url_pattern": "/api/v1/loadbalancers"
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/load_balancers/{loadBalancerID}",
+      "method": "GET",
+      "input_headers": [
+        "Infratographer-Auth"
+      ],
+      "backend": [
+        {
+          "host": ["https://api.load-balancer-api"],
+          "url_pattern": "/api/v1/loadbalancers"
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/tenant/{tenantID}/load_balancers",
+      "method": "POST",
+      "input_headers": [
+        "Infratographer-Auth"
+      ],
+      "backend": [
+        {
+          "host": ["https://api.load-balancer-api"],
+          "url_pattern": "/api/v1/loadbalancers"
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/load_balancers/{loadBalancerID}/ports",
+      "method": "POST",
+      "input_headers": [
+        "Infratographer-Auth"
+      ],
+      "backend": [
+        {
+          "host": ["https://api.load-balancer-api"],
+          "url_pattern": "TODO"
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/load_balancers/{loadBalancerID}/ports/{portNumber}",
+      "method": "PUT",
+      "input_headers": [
+        "Infratographer-Auth"
+      ],
+      "backend": [
+        {
+          "host": ["https://api.load-balancer-api"],
+          "url_pattern": "TODO"
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/load_balancers/{loadBalancerID}/ports/{portNumber}",
+      "method": "PATCH",
+      "input_headers": [
+        "Infratographer-Auth"
+      ],
+      "backend": [
+        {
+          "host": ["https://api.load-balancer-api"],
+          "url_pattern": "TODO"
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/load_balancers/{loadBalancerID}/ports/{portNumber}",
+      "method": "DELETE",
+      "input_headers": [
+        "Infratographer-Auth"
+      ],
+      "backend": [
+        {
+          "host": ["https://api.load-balancer-api"],
+          "url_pattern": "TODO"
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/tenant/{tenantID}/load_balancers/pools",
+      "method": "POST",
+      "input_headers": [
+        "Infratographer-Auth"
+      ],
+      "backend": [
+        {
+          "host": ["https://api.load-balancer-api"],
+          "url_pattern": "TODO"
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/load_balancers/pools/{loadBalancerPoolID}",
+      "method": "GET",
+      "input_headers": [
+        "Infratographer-Auth"
+      ],
+      "backend": [
+        {
+          "host": ["https://api.load-balancer-api"],
+          "url_pattern": "TODO"
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/load_balancers/pools/{loadBalancerPoolID}",
+      "method": "PATCH",
+      "input_headers": [
+        "Infratographer-Auth"
+      ],
+      "backend": [
+        {
+          "host": ["https://api.load-balancer-api"],
+          "url_pattern": "TODO"
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/load_balancers/pools/{loadBalancerPoolID}",
+      "method": "PUT",
+      "input_headers": [
+        "Infratographer-Auth"
+      ],
+      "backend": [
+        {
+          "host": ["https://api.load-balancer-api"],
+          "url_pattern": "TODO"
+        }
+      ]
+    }
+  ],
+  "extra_config": {
+    "security/cors": {
+      "allow_origins": []
+    },
+    "telemetry/opencensus": {
+      "sample_rate": 100,
+      "reporting_period": 1,
+      "enabled_layers": {
+          "backend": true,
+          "router": true
+      },
+      "exporters": {
+        "prometheus": {
+            "port": 9091,
+            "tag_host": true,
+            "tag_path": true,
+            "tag_method": true,
+            "tag_statuscode": true
+        }
+      }
+    }
+  }
+}
