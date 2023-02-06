@@ -9,7 +9,7 @@ RUN FC_ENABLE=1 \
     FC_PARTIALS="/etc/krakend/partials" \
     FC_SETTINGS="/etc/krakend/settings" \
     FC_TEMPLATES="/etc/krakend/templates" \
-    krakend check -d -t -c krakend.infra.tmpl
+    krakend check -d -t -c krakend.tmpl
 
 # The linting needs the final krakend.json file
 RUN krakend check -c /tmp/krakend.json --lint
