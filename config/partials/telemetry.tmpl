@@ -1,0 +1,17 @@
+"telemetry/opencensus": {
+    "sample_rate": 100,
+    "reporting_period": 1,
+    "enabled_layers": {
+        "backend": true,
+        "router": true
+    },
+  "exporters": {
+    "prometheus": {
+        "port": 9091,
+        "tag_host": true,
+        "tag_path": true,
+        "tag_method": true,
+        "tag_statuscode": true
+    }
+  }
+}

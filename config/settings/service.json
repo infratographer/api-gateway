@@ -4,26 +4,7 @@
 	"timeout": "3s",
 	"cache_ttl": "3s",
 	"output_encoding": "json",
-	"extra_config": {
-		"security/cors": {
-		  "allow_origins": []
-		},
-		"telemetry/opencensus": {
-		  "sample_rate": 100,
-		  "reporting_period": 1,
-		  "enabled_layers": {
-			  "backend": true,
-			  "router": true
-		  },
-		  "exporters": {
-        "prometheus": {
-          "port": 9091,
-          "tag_host": true,
-          "tag_path": true,
-          "tag_method": true,
-          "tag_statuscode": true
-        }
-		  }
-		}
+  "backend_hosts": {
+    "load_balancer_api": "api.load-balancer-api"
   }
 }

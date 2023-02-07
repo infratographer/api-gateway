@@ -11,26 +11,10 @@
     "folder": "/usr/lib/krakend/plugins"
   },
   "endpoints": [
-    {{ range $idx, $endpoint := .endpoint.loadblancer }}
-    {{if $idx}},{{end}}
-      {
-        "endpoint": "{{ $endpoint.endpoint }}",
-        "method": "{{ $endpoint.method }}",
-        "backend": [
-            {
-              "url_pattern": "{{ $endpoint.backend_url_pattern }}",
-              "method": "{{ $endpoint.backend_method }}",
-              "host": [
-                "{{ $endpoint.backend_host }}"
-              ],
-              "extra_config": {
-                {{ include "rate_limit_backend.tmpl" }}
-              }
-            }
-        ]
-    }
-    {{ end }}
-    {{ template "sample_template.tmpl" .}}
+    {{ template "load_balancer_api.tmpl" .}}
   ],
-  "extra_config": {{ marshal .service.extra_config }},
+  "extra_config": {
+    {{ include "telemetry.tmpl" }},
+    {{ include "cors.tmpl" }}
+  }
 }
