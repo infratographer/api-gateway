@@ -1,5 +1,5 @@
-
 {
+  "$schema": "https://www.krakend.io/schema/endpoint.json",
   "endpoint": "/v1/tenant/{tenantID}/load_balancers",
   "method": "GET",
   "input_headers": [
@@ -16,6 +16,7 @@
   ]
 },
 {
+  "$schema": "https://www.krakend.io/schema/endpoint.json",
   "endpoint": "/v1/load_balancers/{loadBalancerID}",
   "method": "GET",
   "input_headers": [
@@ -24,11 +25,12 @@
   "backend": [
     {
       "host": ["https://{{ .service.backend_hosts.load_balancer_api }}"],
-      "url_pattern": "/api/v1/loadbalancers"
+      "url_pattern": "/api/v1/loadbalancers/{loadBalancerID}"
     }
   ]
 },
 {
+  "$schema": "https://www.krakend.io/schema/endpoint.json",
   "endpoint": "/v1/tenant/{tenantID}/load_balancers",
   "method": "POST",
   "input_headers": [
@@ -45,6 +47,7 @@
   ]
 },
 {
+  "$schema": "https://www.krakend.io/schema/endpoint.json",
   "endpoint": "/v1/load_balancers/{loadBalancerID}/ports",
   "method": "POST",
   "input_headers": [
@@ -58,6 +61,7 @@
   ]
 },
 {
+  "$schema": "https://www.krakend.io/schema/endpoint.json",
   "endpoint": "/v1/load_balancers/{loadBalancerID}/ports/{portNumber}",
   "method": "PUT",
   "input_headers": [
@@ -71,6 +75,7 @@
   ]
 },
 {
+  "$schema": "https://www.krakend.io/schema/endpoint.json",
   "endpoint": "/v1/load_balancers/{loadBalancerID}/ports/{portNumber}",
   "method": "PATCH",
   "input_headers": [
@@ -84,6 +89,7 @@
   ]
 },
 {
+  "$schema": "https://www.krakend.io/schema/endpoint.json",
   "endpoint": "/v1/load_balancers/{loadBalancerID}/ports/{portNumber}",
   "method": "DELETE",
   "input_headers": [
@@ -97,6 +103,7 @@
   ]
 },
 {
+  "$schema": "https://www.krakend.io/schema/endpoint.json",
   "endpoint": "/v1/tenant/{tenantID}/load_balancers/pools",
   "method": "POST",
   "input_headers": [
@@ -113,6 +120,7 @@
   ]
 },
 {
+  "$schema": "https://www.krakend.io/schema/endpoint.json",
   "endpoint": "/v1/load_balancers/pools/{loadBalancerPoolID}",
   "method": "GET",
   "input_headers": [
@@ -126,6 +134,7 @@
   ]
 },
 {
+  "$schema": "https://www.krakend.io/schema/endpoint.json",
   "endpoint": "/v1/load_balancers/pools/{loadBalancerPoolID}",
   "method": "PATCH",
   "input_headers": [
@@ -139,6 +148,7 @@
   ]
 },
 {
+  "$schema": "https://www.krakend.io/schema/endpoint.json",
   "endpoint": "/v1/load_balancers/pools/{loadBalancerPoolID}",
   "method": "PUT",
   "input_headers": [

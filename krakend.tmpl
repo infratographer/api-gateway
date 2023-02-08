@@ -10,11 +10,15 @@
     "pattern": ".so",
     "folder": "/usr/lib/krakend/plugins"
   },
-  "endpoints": [
-    {{ template "load_balancer_api.tmpl" .}}
-  ],
+  {{ template "endpoints.tmpl" .}},
   "extra_config": {
     {{ include "telemetry.tmpl" }},
-    {{ include "cors.tmpl" }}
+    {{ include "cors.tmpl" }},
+    "router": {
+      "@comment": "dont show healthcheck endpoint in the logs",
+      "logger_skip_paths": [
+          "/__health"
+      ]
+    }
   }
 }
