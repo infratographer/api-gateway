@@ -3,7 +3,7 @@ name: Image build
 on:
   push:
     branches:
-      - cf-initial-config
+      - *
 
 jobs:
   image-build:
