@@ -1,6 +1,8 @@
 # Infratographer API-GATEWAY
 
-This repo contains a reference implementation of the api-gateway for infratographer.
+This repo contains the api-gateway for infratographer. This is the API that all infratographer eco systems tools are being built against. 
+
+The goal is to provide an easy way for end users to add additional endpoints for custom components as well as replace infratographer provided components with components that provide the same API interfaces.
 
 ## Building a config
 
