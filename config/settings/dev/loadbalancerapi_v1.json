@@ -1,0 +1,5 @@
+{
+    "backend_hosts": [
+        "http://host.docker.internal:7608"
+    ]
+}

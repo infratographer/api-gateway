@@ -1,0 +1,129 @@
+#### loadbalancers
+- $schema: https://www.krakend.io/schema/endpoint.json
+  $id: "#endpoint/endpoint"
+  endpoint: /v1/tenant/{tenantID}/load_balancers
+  method: GET
+  input_headers: &input_headers
+    - Authorization
+    - Content-Length
+    - Content-Type
+    - Host
+    - Infratographer-Auth
+  output_encoding: &outputEncoding no-op
+  backend:
+    - url_pattern: /v1/tenant/{tenantID}/loadbalancers
+      method: GET
+      host: &hosts {{ .loadbalancerapi_v1.backend_hosts }}
+      extra_config: &extraConfig {}
+- $schema: https://www.krakend.io/schema/endpoint.json
+  $id: "#endpoint/endpoint"
+  endpoint: /v1/load_balancers/{loadBalancerID}
+  method: GET
+  input_headers: *input_headers
+  output_encoding: *outputEncoding
+  backend:
+    - url_pattern: /v1/loadbalancers/{loadBalancerID}
+      method: GET
+      host: *hosts
+      extra_config: *extraConfig
+- $schema: https://www.krakend.io/schema/endpoint.json
+  $id: "#endpoint/endpoint"
+  endpoint: /v1/tenant/{tenantID}/load_balancers
+  method: POST
+  input_headers: *input_headers
+  output_encoding: *outputEncoding
+  backend:
+    - url_pattern: /v1/tenant/{tenantID}/loadbalancers
+      method: POST
+      host: *hosts
+      extra_config: *extraConfig
+#### ports
+- $schema: https://www.krakend.io/schema/endpoint.json
+  $id: "#endpoint/endpoint"
+  endpoint: /v1/load_balancers/{loadBalancerID}/ports
+  method: POST
+  input_headers: *input_headers
+  output_encoding: *outputEncoding
+  backend:
+    - url_pattern: /v1/loadbalancers/{loadBalancerID}/ports
+      method: POST
+      host: *hosts
+      extra_config: *extraConfig
+- $schema: https://www.krakend.io/schema/endpoint.json
+  $id: "#endpoint/endpoint"
+  endpoint: /v1/load_balancers/{loadBalancerID}/ports/{portID}
+  method: PUT
+  input_headers: *input_headers
+  output_encoding: *outputEncoding
+  backend:
+    - url_pattern: /v1/ports/{portID}
+      method: PUT
+      host: *hosts
+      extra_config: *extraConfig
+- $schema: https://www.krakend.io/schema/endpoint.json
+  $id: "#endpoint/endpoint"
+  endpoint: /v1/load_balancers/{loadBalancerID}/ports/{portID}
+  method: PATCH
+  input_headers: *input_headers
+  output_encoding: *outputEncoding
+  backend:
+    - url_pattern: /v1/ports/{portID}
+      method: PATCH
+      host: *hosts
+      extra_config: *extraConfig
+- $schema: https://www.krakend.io/schema/endpoint.json
+  $id: "#endpoint/endpoint"
+  endpoint: /v1/load_balancers/{loadBalancerID}/ports/{portID}
+  method: DELETE
+  input_headers: *input_headers
+  output_encoding: *outputEncoding
+  backend:
+    - url_pattern: /v1/ports/{portID}
+      method: DELETE
+      host: *hosts
+      extra_config: *extraConfig
+#### pools
+- $schema: https://www.krakend.io/schema/endpoint.json
+  $id: "#endpoint/endpoint"
+  endpoint: /v1/tenant/{tenantID}/load_balancers/pools
+  method: POST
+  input_headers: *input_headers
+  output_encoding: *outputEncoding
+  backend:
+    - url_pattern: /v1/tenant/{tenantID}/pools
+      method: POST
+      host: *hosts
+      extra_config: *extraConfig
+- $schema: https://www.krakend.io/schema/endpoint.json
+  $id: "#endpoint/endpoint"
+  endpoint: /v1/load_balancers/pools/{poolID}
+  method: GET
+  input_headers: *input_headers
+  output_encoding: *outputEncoding
+  backend:
+    - url_pattern: /v1/pools/{poolID}
+      method: GET
+      host: *hosts
+      extra_config: *extraConfig
+- $schema: https://www.krakend.io/schema/endpoint.json
+  $id: "#endpoint/endpoint"
+  endpoint: /v1/load_balancers/pools/{poolID}
+  method: PATCH
+  input_headers: *input_headers
+  output_encoding: *outputEncoding
+  backend:
+    - url_pattern: /v1/pools/{poolID}
+      method: PATCH
+      host: *hosts
+      extra_config: *extraConfig
+- $schema: https://www.krakend.io/schema/endpoint.json
+  $id: "#endpoint/endpoint"
+  endpoint: /v1/load_balancers/pools/{poolID}
+  method: PUT
+  input_headers: *input_headers
+  output_encoding: *outputEncoding
+  backend:
+    - url_pattern: /v1/pools/{poolID}
+      method: PUT
+      host: *hosts
+      extra_config: *extraConfig

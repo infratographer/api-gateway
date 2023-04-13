@@ -1,46 +1,53 @@
 # Infratographer API-GATEWAY
 
-This repo contains the api-gateway for infratographer. This is the API that all infratographer eco systems tools are being built against. 
+This repo contains the api-gateway for infratographer. This is the API that all infratographer eco systems tools are being built against.
 
 The goal is to provide an easy way for end users to add additional endpoints for custom components as well as replace infratographer provided components with components that provide the same API interfaces.
 
-## Building a config
+## Usage
 
-You can leverage this repository to build a krakend config from the given templates.
+### Adding endpoints
 
-### Using Docker
+All the definitions are in the `config/templates` directory. Once you create your endpoint file, add it's reference to the `config/templates/_endpoints.tmpl` file. The format of the files follows the
+[Lura](https://luraproject.org/) [endpoint configuration format](https://www.krakend.io/docs/endpoints/).
+Specifically, each file may be a single endpoint definition or an array of endpoint definitions.
 
-```shell
-docker run \
---rm -it -p "8080:8080" \
--v "$PWD:/etc/krakend" \
--e FC_ENABLE=1 \
--e FC_SETTINGS=config/settings/prod \
--e FC_PARTIALS=config/partials \
--e FC_TEMPLATES=config/templates \
--e FC_OUT=krakend.json \
--e SERVICE_NAME="Infratographer API Gateway" \
-devopsfaith/krakend check -t -d -c "krakend.tmpl"
+The name of the file should be the name of the endpoint.
+
+The file in `config/templates/loadbalancer_api_v1.tmpl` serves as an example.
+
+## Distribution
+
+Endpoints are aggregated and set up in a complete krakend configuration. The base
+of the krakend configuration is available in the
+[`krakend.tmpl`](config/krakend.tmpl) file. The configuration is then
+embedded and distributed as a container image that also contains the API
+Gateway binary and plugins.
+
+The resulting image is `ghcr.io/infratographer/api-gateway`.
+
+## Testing
+
+Note that `docker` is required to run verifications and the tests.
+
+In order to locally verify that the endpoint definitions are valid, you can run the following
+command:
+
+```bash
+make lint
 ```
 
-### Using Docker Compose
+This will ensure that any endpoints you create within the `config/templates` directory are valid.
 
-Based on the definition included in the [docker-compose.yml](docker-compose.yml) definition.
+Finally, if you want to create a container image like the one we ship with the API Gateway, you
+can run the following command:
 
-```shell
-$ docker-compose up
+```bash
+make gateway-image
 ```
 
-### Using the binary locally
+## Running locally
 
-```shell
-FC_ENABLE=1 \
-FC_SETTINGS=config/settings \
-FC_PARTIALS=config/partials \
-FC_TEMPLATES=config/templates \
-FC_OUT=krakend.json \
-SERVICE_NAME="Infratographer API Gateway" \
-krakend check -tdc "krakend.tmpl"
+```bash
+make run-local
 ```
-
-Note: both above alternatives will output a `krakend.json` file with the compiled version of the config file, useful for debugging purposes.
