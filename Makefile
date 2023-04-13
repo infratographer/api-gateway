@@ -15,7 +15,7 @@ help: Makefile ## Print help
 check-generate:	## Run verification on endpoints
 	@echo "Verifying the endpoints and config"
 	@docker run \
-		--rm -t --user root \
+		--rm -t --privileged --user root \
 		-v $(PWD):/workdir \
 		-v $(PWD)/config:/etc/krakend/ \
 		-e KRAKEND_PORT=${KRAKEND_PORT} \
@@ -31,7 +31,7 @@ lint: check-generate ## Run lint on the generated yml krakend config
 	@echo Linting generated yaml config
 	@docker run --rm -v $(PWD)/krakend.yml:/workdir/krakend.yml \
 		simplealpine/yaml2json /workdir/krakend.yml > ${TMPDIR}/krakend.json
-	@echo json is required for lint tooling, converting...
+	@echo json is required for lint tool, converting...
 	@docker run --rm -v ${TMPDIR}/krakend.json:/etc/krakend/krakend.json \
 		-e FC_OUT=krakend.yml devopsfaith/krakend check -c krakend.json --lint
 
