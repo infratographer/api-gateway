@@ -17,8 +17,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Run check-generate
-        run: make check-generate
+      - name: Run check
+        run: make check
 
   build-image:
     name: build-image
@@ -28,7 +28,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Generate krakend configuration
-        run: SETTINGS_ENV=kube make check-generate
+        run: make check
 
       - name: docker-metadata
         id: docker-metadata
