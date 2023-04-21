@@ -12,7 +12,7 @@ RUN chown -R 1000:1000 /etc/krakend-src/config/krakend.tmpl
 USER 1000:1000
 
 # required flexible configuration to enable yaml
-ENV FC_OUT=krakend.yml
+ENV FC_OUT=/tmp/krakend.yml
 
 ENTRYPOINT [ "/usr/bin/krakend" ]
 CMD [ "run", "-c", "/etc/krakend-src/config/krakend.tmpl" ]

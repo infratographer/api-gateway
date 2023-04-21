@@ -19,7 +19,7 @@ help: Makefile ## Print help
 check:	## Run verification on krakend tmpl config
 	@echo "Verifying the endpoints and config"
 	@docker run \
-		--rm -t --privileged --user root \
+		--rm -t \
 		-v $(PWD):/workdir \
 		-v $(PWD)/config:/etc/krakend/ \
 		-e KRAKEND_PORT=${KRAKEND_PORT} \
@@ -29,7 +29,7 @@ check:	## Run verification on krakend tmpl config
 		-e FC_PARTIALS=${FC_PARTIALS} \
 		-e FC_TEMPLATES=${FC_TEMPLATES} \
 		-e FC_OUT=${FC_OUT} \
-		devopsfaith/krakend check -dtc krakend.tmpl
+		$(LOCAL_RUN_ARGS) devopsfaith/krakend check -dtc krakend.tmpl
 
 .PHONY: gateway-image
 gateway-image: check ## Generate the krakend configuration and build the image
