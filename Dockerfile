@@ -1,21 +1,18 @@
-FROM devopsfaith/krakend as builder
+# TODO: Add renovate configuration that will track GitHub releases
+# The intent is to use release tags instead of commit hashes
+FROM ghcr.io/infratographer/porton/porton:latest
 
-COPY krakend.tmpl .
-COPY config .
+USER root
 
-## Save temporary file to /tmp to avoid permission errors
-RUN FC_ENABLE=1 \
-    FC_OUT=/tmp/krakend.json \
-    FC_PARTIALS="/etc/krakend/partials" \
-    FC_SETTINGS="/etc/krakend/settings" \
-    FC_TEMPLATES="/etc/krakend/templates" \
-    krakend check -d -t -c krakend.tmpl
+# Install the configuration file in the expected path
+COPY config/krakend.tmpl /etc/krakend-src/config/krakend.tmpl
 
-# The linting needs the final krakend.json file
-RUN krakend check -c /tmp/krakend.json --lint
+RUN chown -R 1000:1000 /etc/krakend-src/config/krakend.tmpl
 
-FROM devopsfaith/krakend
-COPY --from=builder --chown=krakend /tmp/krakend.json .
+USER 1000:1000
 
-# Uncomment with Enterprise image:
-# COPY LICENSE /etc/krakend/LICENSE
+# required flexible configuration to enable yaml
+ENV FC_OUT=/tmp/krakend.yml
+
+ENTRYPOINT [ "/usr/bin/krakend" ]
+CMD [ "run", "-c", "/etc/krakend-src/config/krakend.tmpl" ]

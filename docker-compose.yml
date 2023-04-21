@@ -11,6 +11,6 @@ services:
       - FC_SETTINGS=config/settings/prod
       - FC_PARTIALS=config/partials
       - FC_TEMPLATES=config/templates
-      - FC_OUT=krakend.json
+      - FC_OUT=krakend.yml
       - SERVICE_NAME=Infratographer API Gateway
     command: [ "run", "-dc", "krakend.tmpl", "" ]

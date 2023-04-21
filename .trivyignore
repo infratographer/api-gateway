@@ -1,0 +1,4 @@
+# Accepting CVE-2020-13949 since the krakend image imports the thrift binary via a dependency
+# but does not actually use it. So this is not applicable.
+# Signed-off-by: Juan.OsorioRobles@eu.equinix.com
+CVE-2020-13949

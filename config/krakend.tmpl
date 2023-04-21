@@ -1,0 +1,18 @@
+---
+"$schema": https://www.krakend.io/schema/v3.json
+version: 3
+name: your-api-group-name
+port: {{ env "KRAKEND_PORT" }}
+timeout: {{ default "3s" .service.timeout }}
+cache_ttl: {{ default "3s" .service.cache_ttl }}
+output_encoding: {{ default "no-op" .service.output_encoding }}
+plugin:
+  pattern: ".so"
+  folder: "/opt/krakend/plugins/"
+extra_config:
+{{ include "no_healthcheck_logs.tmpl" | indent 2 }}
+{{ include "telemetry.tmpl" | indent 2 }}
+{{ include "cors.tmpl" | indent 2 }}
+endpoints:
+{{ template "_endpoints.tmpl" . }}
+
