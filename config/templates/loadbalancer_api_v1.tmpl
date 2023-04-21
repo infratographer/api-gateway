@@ -13,7 +13,7 @@
   backend:
     - url_pattern: /v1/tenant/{tenantID}/loadbalancers
       method: GET
-      host: &hosts {{ .backends.load_balancer_api }}
+      host: &hosts {{ env "LOADBALANCER_API_BACKEND_HOSTS" | splitList "," | toJson }}
       extra_config: &extraConfig {}
 - $schema: https://www.krakend.io/schema/endpoint.json
   $id: "#endpoint/endpoint"

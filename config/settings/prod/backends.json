@@ -1,5 +1,0 @@
-{
-    "load_balancer_api": [
-        "load-balancer-api.load-balancer-api.svc.cluster.local"
-    ]
-}
