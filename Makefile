@@ -29,7 +29,7 @@ check:	## Run verification on krakend tmpl config
 		-e FC_PARTIALS=${FC_PARTIALS} \
 		-e FC_TEMPLATES=${FC_TEMPLATES} \
 		-e FC_OUT=${FC_OUT} \
-		$(LOCAL_RUN_ARGS) devopsfaith/krakend check -dtc krakend.tmpl
+		devopsfaith/krakend check -dtc krakend.tmpl
 
 .PHONY: gateway-image
 gateway-image: check ## Generate the krakend configuration and build the image
